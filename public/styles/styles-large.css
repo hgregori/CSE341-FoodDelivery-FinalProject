@@ -1,0 +1,185 @@
+/* COLOR PALETTE
+
+Primary Purple: #4c1d95
+Secondary Purple: #6d28d9
+Dark Background: #12091f
+Card Background: #1d1033
+Accent Color: #f59e0b
+Text Color: #f8fafc
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #12091f;
+    color: #f8fafc;
+
+    /* ROBOTO HERE */
+    font-family: "Roboto", sans-serif;
+    font-family: sans-serif;
+
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* HEADER */
+
+.header {
+    background-color: #1d1033;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 8%;
+    position: sticky;
+    top: 0;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #f59e0b;
+}
+
+.nav ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    color: white;
+    transition: .3s;
+}
+
+.nav a:hover {
+    color: #f59e0b;
+}
+
+.cart-btn {
+    background: #f59e0b;
+    color: black;
+
+    padding: .75rem 1.2rem;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 85vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 2rem;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+}
+
+.primary-btn {
+    background-color: #6d28d9;
+    color: white;
+
+    padding: 1rem 2rem;
+    border-radius: 10px;
+
+    transition: .3s;
+}
+
+.primary-btn:hover {
+    background-color: #7c3aed;
+}
+
+/* FEATURED SECTION */
+
+.featured {
+    padding: 4rem 8%;
+}
+
+.featured h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.food-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 2rem;
+}
+
+.food-card {
+    background-color: #1d1033;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    transition: .3s;
+}
+
+.food-card:hover {
+    transform: translateY(-10px);
+}
+
+.food-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.food-card h3,
+.food-card p {
+    padding: 1rem;
+}
+
+.food-card p {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+/* FOOTER */
+
+.footer {
+    background-color: #1d1033;
+
+    text-align: center;
+
+    padding: 2rem;
+    margin-top: 4rem;
+}
