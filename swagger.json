@@ -5,7 +5,7 @@
     "description": "This is the Final Project for CSE341 - Henrique Gregorio",
     "version": "1.0.0"
   },
-  "host": "cse341-fooddelivery-finalproject.onrender.com/",
+  "host": "cse341-fooddelivery-finalproject.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
