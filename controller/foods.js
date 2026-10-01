@@ -7,10 +7,13 @@ const getAllFoods = async (req, res) => {
             .find({})
             .toArray();
 
-        res.render("menu", {
-            title: "Menu",
-            foods
-        });
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(foods);
+
+        // res.render("menu", {
+        //     title: "Menu",
+        //     foods
+        // });
 
     } catch (error) {
         console.error(error);
