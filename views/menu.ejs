@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+
+<main class="menu-container">
+
+    <section class="menu-header">
+        <h1><%= title %></h1>
+        <p>Choose your favorite meal and get it delivered fast.</p>
+    </section>
+
+    <section class="food-grid">
+
+        <% foods.forEach(food => { %>
+
+            <article class="food-card">
+
+                <%= food.image %>                    alt="<%= food.imageAlt %>"
+                    class="food-image"
+                >
+
+                <div class="food-content">
+
+                    <span class="restaurant-name">
+                        <%= food.restaurantName %>
+                    </span>
+
+                    <h2 class="food-title">
+                        <%= food.name %>
+                    </h2>
+
+                    <span class="food-category">
+                        <%= food.category %>
+                    </span>
+
+                    <p class="ingredients">
+                        <%= food.ingredients.join(", ") %>
+                    </p>
+
+                    <div class="food-footer">
+
+                        <span class="food-price">
+                            $<%= food.price.toFixed(2) %>
+                        </span>
+
+                    </div>
+
+                    <div class="food-actions">
+
+                        /foods/<%= food._id %>                            class="details-btn"
+                        >
+                            View Details
+                        </a>
+
+                        <button
+                            class="buy-btn"
+                            data-id="<%= food._id %>"
+                        >
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        <% }) %>
+
+    </section>
+
+</main>
+
+<%- include('partials/footer') %>
