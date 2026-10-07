@@ -3,38 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="FoodExpress - Food Delivery">
     <meta name="author" content="Henrique Gregorio">
     <meta name="keywords" content="Food Delivery">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,87.5,100..900;1,87.5,100..900&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,87.5,100..900;1,87.5,100..900&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="/styles/styles-large.css">
 
-    <title>Food Delivery</title>
+    <title><%= typeof title !== "undefined" ? title : "FoodExpress" %></title>
 
     <link rel="icon" type="image/png" href="/images/favicon.ico">
-
 </head>
+
 <body>
 
 <header class="header">
     <div class="logo">
-        FoodExpress
+        <a href="/">FoodExpress</a>
     </div>
 
     <nav class="nav">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/menu">Menu</a></li>
-            <li><a href="/orders">Orders</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li>
+                <a href="/menu">Menu</a>
+            </li>
+
+            <% if (locals.user) { %>
+                <li>
+                    <a href="/orders">Orders</a>
+                </li>
+
+                <li>
+                    <a href="/profile">Profile</a>
+                </li>
+            <% } %>
         </ul>
     </nav>
 
-    <div class="cart-btn">
-        Cart
+    <div class="header-actions">
+        <% if (locals.user) { %>
+            <a href="/cart" class="cart-btn">
+                Cart
+            </a>
+
+            <a href="/logout" class="logout-btn">
+                Logout
+            </a>
+        <% } else { %>
+            <a href="/auth/google" class="login-btn">
+                Login with Google
+            </a>
+        <% } %>
     </div>
 </header>
