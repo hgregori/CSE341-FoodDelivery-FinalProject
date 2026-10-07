@@ -8,7 +8,7 @@ const doc = {
     },
     host: "cse341-fooddelivery-finalproject.onrender.com",
     basePath: "/",
-    schemes: ["https", "http"],
+    schemes: ["https"],
     tags: [
         {
             name: "Foods",
