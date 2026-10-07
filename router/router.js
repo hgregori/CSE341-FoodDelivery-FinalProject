@@ -233,10 +233,11 @@ router.delete("/restaurants/:id", (req, res) => {
 
 router.use('/api-docs', (req, res, next) => {
     // Dynamically match the current host and protocol for testing in localhost or on Render
+    const isHttps = req.protocol === 'https' || req.headers['x-forwarded-proto'] === 'https';
     swaggerDocument.host = req.get('host');
-    swaggerDocument.schemes = [req.protocol];
+    swaggerDocument.schemes = [isHttps ? 'https' : 'http'];
     req.swaggerDoc = swaggerDocument;
     next();
-}, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}, swaggerUi.serveFiles(swaggerDocument, {}), swaggerUi.setup());
 
 module.exports = router;
