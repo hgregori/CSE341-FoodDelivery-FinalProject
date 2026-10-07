@@ -2,24 +2,38 @@
   "swagger": "2.0",
   "info": {
     "title": "CSE341 Final Project - Henrique Gregorio",
-    "description": "This is the Final Project for CSE341 - Henrique Gregorio",
+    "description": "Food Delivery API for CSE341 - Henrique Gregorio",
     "version": "1.0.0"
   },
   "host": "cse341-fooddelivery-finalproject.onrender.com",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Foods",
+      "description": "Operations related to food items and menu"
+    },
+    {
+      "name": "Restaurants",
+      "description": "Operations related to restaurants"
+    }
+  ],
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/menu": {
       "get": {
-        "description": "",
+        "tags": [
+          "Foods"
+        ],
+        "description": "Get all foods from the menu",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all food items"
           },
           "500": {
             "description": "Internal Server Error"
@@ -27,23 +41,40 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Foods"
+        ],
+        "description": "Create a new food item",
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Food object to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Food"
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Food created successfully"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       }
     },
     "/menu/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Foods"
+        ],
+        "description": "Get a single food item by ID",
         "produces": [
           "application/json"
         ],
@@ -52,34 +83,19 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Food ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Food item data"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Invalid ID format"
+          },
+          "404": {
+            "description": "Food not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -87,7 +103,10 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Foods"
+        ],
+        "description": "Update a food item by ID",
         "produces": [
           "application/json"
         ],
@@ -96,12 +115,60 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Food ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Food object with updated fields",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Food"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Food updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID format"
+          },
+          "404": {
+            "description": "Food not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Foods"
+        ],
+        "description": "Delete a food item by ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Food ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Food deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID format"
+          },
+          "404": {
+            "description": "Food not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -111,13 +178,16 @@
     },
     "/restaurants": {
       "get": {
-        "description": "",
+        "tags": [
+          "Restaurants"
+        ],
+        "description": "Get all restaurants",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "List of all restaurants"
           },
           "500": {
             "description": "Internal Server Error"
@@ -125,23 +195,40 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Restaurants"
+        ],
+        "description": "Create a new restaurant",
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Restaurant object to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Restaurant created successfully"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error"
           }
         }
       }
     },
     "/restaurants/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Restaurants"
+        ],
+        "description": "Get a single restaurant by ID",
         "produces": [
           "application/json"
         ],
@@ -150,34 +237,19 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Restaurant ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Restaurant data"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Invalid ID format"
+          },
+          "404": {
+            "description": "Restaurant not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -185,7 +257,10 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Restaurants"
+        ],
+        "description": "Update a restaurant by ID",
         "produces": [
           "application/json"
         ],
@@ -194,16 +269,157 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Restaurant ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Restaurant object with updated fields",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Restaurant updated successfully"
+          },
+          "400": {
+            "description": "Invalid ID format"
+          },
+          "404": {
+            "description": "Restaurant not found"
           },
           "500": {
             "description": "Internal Server Error"
           }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Restaurants"
+        ],
+        "description": "Delete a restaurant by ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Restaurant ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restaurant deleted successfully"
+          },
+          "400": {
+            "description": "Invalid ID format"
+          },
+          "404": {
+            "description": "Restaurant not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Food": {
+      "type": "object",
+      "properties": {
+        "restaurantId": {
+          "type": "string",
+          "example": "6abd917edd6772b461ea47e2"
+        },
+        "name": {
+          "type": "string",
+          "example": "Fried Rice"
+        },
+        "price": {
+          "type": "number",
+          "example": 12.49
+        },
+        "amount": {
+          "type": "string",
+          "example": "1 plate"
+        },
+        "ingredients": {
+          "type": "array",
+          "example": [
+            "rice",
+            "egg",
+            "carrot",
+            "peas",
+            "soy sauce"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "image": {
+          "type": "string",
+          "example": "/images/foods/fried-rice.jpg"
+        },
+        "imageAlt": {
+          "type": "string",
+          "example": "Plate of fried rice with vegetables and egg"
+        },
+        "category": {
+          "type": "string",
+          "example": "Main Course"
+        },
+        "featured": {
+          "type": "boolean",
+          "example": true
+        },
+        "available": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "Restaurant": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Sakura Sushi House"
+        },
+        "address": {
+          "type": "string",
+          "example": "125 Cherry Blossom Ave, New York, NY"
+        },
+        "cuisine": {
+          "type": "string",
+          "example": "Japanese"
+        },
+        "rating": {
+          "type": "number",
+          "example": 4.8
+        },
+        "description": {
+          "type": "string",
+          "example": "Authentic Japanese cuisine featuring fresh sushi, sashimi, ramen, and traditional dishes prepared daily."
+        },
+        "openingHours": {
+          "type": "string",
+          "example": "11:00 AM - 10:00 PM"
+        },
+        "deliveryFee": {
+          "type": "number",
+          "example": 3.99
+        },
+        "image": {
+          "type": "string",
+          "example": "/images/restaurants/sakura-sushi-house.jpg"
         }
       }
     }
