@@ -1,0 +1,96 @@
+### Variables
+@baseUrl = http://localhost:3002
+# @baseUrl = https://cse341-fooddelivery-finalproject.onrender.com
+
+### ===================================================
+### FOODS / MENU
+### ===================================================
+
+### 1. GET all foods
+GET {{baseUrl}}/menu
+Accept: application/json
+
+### 2. GET food by ID (Replace with a valid ID from the list above)
+GET {{baseUrl}}/menu/6abd93afdd6772b461ea47e8
+Accept: application/json
+
+### 3. POST - Create new food
+POST {{baseUrl}}/menu
+Content-Type: application/json
+
+{
+  "restaurantId": "6abd917edd6772b461ea47e2",
+  "name": "California Roll",
+  "price": 9.99,
+  "amount": "8 pieces",
+  "ingredients": ["crab", "avocado", "cucumber", "nori", "rice"],
+  "image": "/images/foods/california-roll.jpg",
+  "imageAlt": "California roll with avocado and crab",
+  "category": "Sushi",
+  "featured": true,
+  "available": true
+}
+
+### 4. PUT - Update food by ID (Replace with the created ID)
+PUT {{baseUrl}}/menu/6abd93afdd6772b461ea47e8
+Content-Type: application/json
+
+{
+  "name": "Special Fried Rice",
+  "price": 13.99,
+  "amount": "1 large plate",
+  "ingredients": ["rice", "egg", "carrot", "peas", "soy sauce", "shrimp"],
+  "image": "/images/foods/fried-rice.jpg",
+  "imageAlt": "Plate of fried rice with shrimp and vegetables",
+  "category": "Main Course",
+  "featured": true,
+  "available": true
+}
+
+### 5. DELETE food by ID (Replace with ID to delete)
+DELETE {{baseUrl}}/menu/6abd93afdd6772b461ea47e8
+
+### ===================================================
+### RESTAURANTS
+### ===================================================
+
+### 1. GET all restaurants
+GET {{baseUrl}}/restaurants
+Accept: application/json
+
+### 2. GET restaurant by ID (Replace with a valid ID)
+GET {{baseUrl}}/restaurants/6abd917edd6772b461ea47de
+Accept: application/json
+
+### 3. POST - Create new restaurant
+POST {{baseUrl}}/restaurants
+Content-Type: application/json
+
+{
+  "name": "Tokyo Express Ramen",
+  "address": "456 Tokyo Way, Rexburg, ID",
+  "cuisine": "Japanese",
+  "rating": 4.9,
+  "description": "Authentic handmade ramen noodles and rich broth simmered for 16 hours.",
+  "openingHours": "11:30 AM - 9:30 PM",
+  "deliveryFee": 2.99,
+  "image": "/images/restaurants/tokyo-express.jpg"
+}
+
+### 4. PUT - Update restaurant by ID (Replace with a valid ID)
+PUT {{baseUrl}}/restaurants/6abd917edd6772b461ea47de
+Content-Type: application/json
+
+{
+  "name": "Sakura Sushi & Grill House",
+  "address": "125 Cherry Blossom Ave, New York, NY",
+  "cuisine": "Japanese",
+  "rating": 4.9,
+  "description": "Authentic Japanese cuisine featuring fresh sushi, premium sashimi, ramen, and robata grill dishes.",
+  "openingHours": "11:00 AM - 10:30 PM",
+  "deliveryFee": 3.49,
+  "image": "/images/restaurants/sakura-sushi-house.jpg"
+}
+
+### 5. DELETE restaurant by ID (Replace with ID to delete)
+DELETE {{baseUrl}}/restaurants/6abd917edd6772b461ea47de
