@@ -10,7 +10,11 @@ const restaurantsController = require("../controller/restaurants");
 const usersController = require("../controller/users");
 const transactionsController = require("../controller/transactions");
 
-const isAuthenticated = require("../middleware/oauthValidation").isAuthenticated;
+const { isAuthenticated, checkFirstTimeUser } = require("../middleware/oauthValidation");
+const { validateFood } = require("../middleware/validationFood");
+const { validateRestaurant } = require("../middleware/validationRestaurants");
+const { validateUser } = require("../middleware/validationUsers");
+const { validateTransaction } = require("../middleware/validationTransactions");
 //=========================== Main Routes ===========================
 
 router.get("/", (req, res) => {
@@ -54,7 +58,7 @@ router.get("/menu/:id", isAuthenticated, (req, res) => {
     foodsController.getSingleFood(req, res);
 });
 
-router.post("/menu", isAuthenticated, (req, res) => {
+router.post("/menu", isAuthenticated, validateFood, (req, res) => {
     /* 
         #swagger.tags = ['Foods']
         #swagger.description = 'Create a new food item'
@@ -74,7 +78,7 @@ router.post("/menu", isAuthenticated, (req, res) => {
     foodsController.createFood(req, res);
 });
 
-router.put("/menu/:id", isAuthenticated, (req, res) => {
+router.put("/menu/:id", isAuthenticated, validateFood, (req, res) => {
     /* 
         #swagger.tags = ['Foods']
         #swagger.description = 'Update a food item by ID'
@@ -162,7 +166,7 @@ router.get("/restaurants/:id", isAuthenticated, (req, res) => {
     restaurantsController.getSingleRestaurant(req, res);
 });
 
-router.post("/restaurants", isAuthenticated, (req, res) => {
+router.post("/restaurants", isAuthenticated, validateRestaurant, (req, res) => {
     /* 
         #swagger.tags = ['Restaurants']
         #swagger.description = 'Create a new restaurant'
@@ -182,7 +186,7 @@ router.post("/restaurants", isAuthenticated, (req, res) => {
     restaurantsController.createRestaurant(req, res);
 });
 
-router.put("/restaurants/:id", isAuthenticated, (req, res) => {
+router.put("/restaurants/:id", isAuthenticated, validateRestaurant, (req, res) => {
     /* 
         #swagger.tags = ['Restaurants']
         #swagger.description = 'Update a restaurant by ID'
@@ -270,7 +274,7 @@ router.get("/users/:id", isAuthenticated, (req, res) => {
     usersController.getSingleUser(req, res);
 });
 
-router.post("/users", isAuthenticated, (req, res) => {
+router.post("/users", isAuthenticated, validateUser, (req, res) => {
     /* 
         #swagger.tags = ['Users']
         #swagger.description = 'Create a new user'
@@ -290,7 +294,7 @@ router.post("/users", isAuthenticated, (req, res) => {
     usersController.createUser(req, res);
 });
 
-router.put("/users/:id", isAuthenticated, (req, res) => {
+router.put("/users/:id", isAuthenticated, validateUser, (req, res) => {
     /* 
         #swagger.tags = ['Users']
         #swagger.description = 'Update a user by ID'
@@ -378,7 +382,7 @@ router.get("/transactions/:id", isAuthenticated, (req, res) => {
     transactionsController.getSingleTransaction(req, res);
 });
 
-router.post("/transactions", isAuthenticated, (req, res) => {
+router.post("/transactions", isAuthenticated, validateTransaction, (req, res) => {
     /* 
         #swagger.tags = ['Transactions']
         #swagger.description = 'Create a new transaction'
@@ -398,7 +402,7 @@ router.post("/transactions", isAuthenticated, (req, res) => {
     transactionsController.createTransaction(req, res);
 });
 
-router.put("/transactions/:id", isAuthenticated, (req, res) => {
+router.put("/transactions/:id", isAuthenticated, validateTransaction, (req, res) => {
     /* 
         #swagger.tags = ['Transactions']
         #swagger.description = 'Update a transaction by ID'
@@ -514,6 +518,7 @@ router.get(
     passport.authenticate("google", {
         failureRedirect: "/login"
     }),
+    checkFirstTimeUser,
     (req, res) => {
         res.redirect("/");
     }

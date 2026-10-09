@@ -17,6 +17,14 @@ const doc = {
         {
             name: "Restaurants",
             description: "Operations related to restaurants"
+        },
+        {
+            name: "Users",
+            description: "Operations related to user accounts"
+        },
+        {
+            name: "Transactions",
+            description: "Operations related to order transactions"
         }
     ],
     definitions: {
@@ -47,6 +55,27 @@ const doc = {
             openingHours: "11:00 AM - 10:00 PM",
             deliveryFee: 3.99,
             image: "/images/restaurants/sakura-sushi-house.jpg"
+        },
+        User: {
+            name: "Henrique Gregorio",
+            email: "henrique@example.com",
+            role: "customer",
+            active: true
+        },
+        Transaction: {
+            userId: "6ac6c819bd09052255094358",
+            restaurantId: "6abd917edd6772b461ea47de",
+            items: [
+                {
+                    foodId: "6abd93afdd6772b461ea47e8",
+                    name: "Fried Rice",
+                    unitPrice: 12.49,
+                    quantity: 2,
+                    subtotal: 24.98
+                }
+            ],
+            totalPrice: 28.97,
+            status: "pending"
         }
     }
 };

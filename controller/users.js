@@ -61,7 +61,7 @@ const updateUser = async (req, res) => {
         res.status(200).json(response);
     } catch (error) {
         console.error("Error updating user:", error);
-        res.status(500).json({ message: "Error updating restaurant data", error: error.message });
+        res.status(500).json({ message: "Error updating user data", error: error.message });
     }
 };
 
@@ -71,7 +71,7 @@ const deleteUser = async (req, res) => {
             return res.status(400).json({ message: "Must use a valid user id." });
         }
 
-        const response = await db.collection("restaurants").deleteOne({ _id: new ObjectId(req.params.id) });
+        const response = await db.collection("users").deleteOne({ _id: new ObjectId(req.params.id) });
 
         if (response.deletedCount === 0) {
             return res.status(404).json({ message: "User not found" });
