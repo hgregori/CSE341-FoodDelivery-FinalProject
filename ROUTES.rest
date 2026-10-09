@@ -14,12 +14,12 @@ Accept: application/json
 GET {{baseUrl}}/menu/6abd93afdd6772b461ea47e8
 Accept: application/json
 
-### 3. POST - Create new food
+### 3. POST - Create new food (Valid)
 POST {{baseUrl}}/menu
 Content-Type: application/json
 
 {
-  "restaurantId": "6abd917edd6772b461ea47e2",
+  "restaurantId": "6abd917edd6772b461ea47de",
   "name": "California Roll",
   "price": 9.99,
   "amount": "8 pieces",
@@ -31,11 +31,21 @@ Content-Type: application/json
   "available": true
 }
 
-### 4. PUT - Update food by ID (Replace with the created ID)
+### 4. POST - Create food (INVALID DATA - Tests 400 Validation Error)
+POST {{baseUrl}}/menu
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": -5.00
+}
+
+### 5. PUT - Update food by ID (Replace with valid ID)
 PUT {{baseUrl}}/menu/6abd93afdd6772b461ea47e8
 Content-Type: application/json
 
 {
+  "restaurantId": "6abd917edd6772b461ea47de",
   "name": "Special Fried Rice",
   "price": 13.99,
   "amount": "1 large plate",
@@ -47,7 +57,7 @@ Content-Type: application/json
   "available": true
 }
 
-### 5. DELETE food by ID (Replace with ID to delete)
+### 6. DELETE food by ID (Replace with ID to delete)
 DELETE {{baseUrl}}/menu/6abd93afdd6772b461ea47e8
 
 ### ===================================================
@@ -62,7 +72,7 @@ Accept: application/json
 GET {{baseUrl}}/restaurants/6abd917edd6772b461ea47de
 Accept: application/json
 
-### 3. POST - Create new restaurant
+### 3. POST - Create new restaurant (Valid)
 POST {{baseUrl}}/restaurants
 Content-Type: application/json
 
@@ -77,7 +87,16 @@ Content-Type: application/json
   "image": "/images/restaurants/tokyo-express.jpg"
 }
 
-### 4. PUT - Update restaurant by ID (Replace with a valid ID)
+### 4. POST - Create restaurant (INVALID DATA - Tests 400 Validation Error)
+POST {{baseUrl}}/restaurants
+Content-Type: application/json
+
+{
+  "name": "",
+  "deliveryFee": -1
+}
+
+### 5. PUT - Update restaurant by ID (Replace with a valid ID)
 PUT {{baseUrl}}/restaurants/6abd917edd6772b461ea47de
 Content-Type: application/json
 
@@ -92,5 +111,117 @@ Content-Type: application/json
   "image": "/images/restaurants/sakura-sushi-house.jpg"
 }
 
-### 5. DELETE restaurant by ID (Replace with ID to delete)
+### 6. DELETE restaurant by ID (Replace with ID to delete)
 DELETE {{baseUrl}}/restaurants/6abd917edd6772b461ea47de
+
+### ===================================================
+### USERS
+### ===================================================
+
+### 1. GET all users
+GET {{baseUrl}}/users
+Accept: application/json
+
+### 2. GET user by ID (Replace with valid ID)
+GET {{baseUrl}}/users/6ac6c819bd09052255094358
+Accept: application/json
+
+### 3. POST - Create new user (Valid)
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "email": "janedoe@example.com",
+  "role": "customer",
+  "active": true
+}
+
+### 4. POST - Create user (INVALID DATA - Tests 400 Validation Error)
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": "not-an-email"
+}
+
+### 5. PUT - Update user by ID
+PUT {{baseUrl}}/users/6ac6c819bd09052255094358
+Content-Type: application/json
+
+{
+  "name": "Henrique Gregorio Updated",
+  "email": "henrique.updated@example.com",
+  "role": "customer",
+  "active": true
+}
+
+### 6. DELETE user by ID
+DELETE {{baseUrl}}/users/6ac6c819bd09052255094358
+
+### ===================================================
+### TRANSACTIONS
+### ===================================================
+
+### 1. GET all transactions
+GET {{baseUrl}}/transactions
+Accept: application/json
+
+### 2. GET transaction by ID
+GET {{baseUrl}}/transactions/6ac6c737bd0905225509434e
+Accept: application/json
+
+### 3. POST - Create new transaction (Valid)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "userId": "6ac6c819bd09052255094358",
+  "restaurantId": "6abd917edd6772b461ea47de",
+  "items": [
+    {
+      "foodId": "6abd93afdd6772b461ea47e8",
+      "name": "Fried Rice",
+      "unitPrice": 12.49,
+      "quantity": 2,
+      "subtotal": 24.98
+    }
+  ],
+  "totalPrice": 28.97,
+  "status": "pending"
+}
+
+### 4. POST - Create transaction (INVALID DATA - Tests 400 Validation Error)
+POST {{baseUrl}}/transactions
+Content-Type: application/json
+
+{
+  "userId": "6ac6c819bd09052255094358",
+  "items": [],
+  "totalPrice": -10,
+  "status": ""
+}
+
+### 5. PUT - Update transaction by ID
+PUT {{baseUrl}}/transactions/6ac6c737bd0905225509434e
+Content-Type: application/json
+
+{
+  "userId": "6ac6c819bd09052255094358",
+  "restaurantId": "6abd917edd6772b461ea47de",
+  "items": [
+    {
+      "foodId": "6abd93afdd6772b461ea47e8",
+      "name": "Fried Rice",
+      "unitPrice": 12.49,
+      "quantity": 2,
+      "subtotal": 24.98
+    }
+  ],
+  "totalPrice": 28.97,
+  "status": "delivered"
+}
+
+### 6. DELETE transaction by ID
+DELETE {{baseUrl}}/transactions/6ac6c737bd0905225509434e
